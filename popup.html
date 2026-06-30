@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --bg:#1c1c1e; --card:#2c2c2e; --txt:#f5f5f7; --txt2:rgba(235,235,245,.55);
+    --txt3:rgba(235,235,245,.35); --green:#30d158; --line:rgba(255,255,255,.09);
+    --track:rgba(120,120,128,.32);
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f5f5f7; --card:#fff; --txt:#1d1d1f; --txt2:rgba(60,60,67,.6);
+      --txt3:rgba(60,60,67,.4); --line:rgba(0,0,0,.08); --track:rgba(120,120,128,.2); }
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none}
+  body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--txt);width:280px;padding:16px}
+  .title{font-size:15px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:7px}
+  .title .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 7px rgba(48,209,88,.6)}
+  .stat{font-size:13px;color:var(--txt2);margin:12px 0 14px}
+  .stat b{color:var(--txt);font-variant-numeric:tabular-nums}
+  button.primary{width:100%;border:none;border-radius:9px;background:var(--green);color:#06210d;
+    font-family:inherit;font-size:13.5px;font-weight:700;padding:10px 0;cursor:pointer;transition:filter .12s}
+  button.primary:hover{filter:brightness(1.06)}
+  button.primary:active{filter:brightness(.95)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:13px}
+  .row:first-of-type{margin-top:14px}
+  .row label{font-weight:600}
+  .num{display:flex;align-items:center;gap:6px;color:var(--txt2)}
+  .num input{width:46px;background:var(--track);border:none;border-radius:6px;color:var(--txt);
+    font-family:inherit;font-size:13px;font-weight:600;text-align:center;padding:5px 0;-webkit-appearance:none}
+  /* iOS-style switch */
+  .sw{position:relative;width:42px;height:25px;border-radius:25px;background:var(--track);cursor:pointer;transition:background .2s;flex-shrink:0}
+  .sw input{opacity:0;width:0;height:0;position:absolute}
+  .sw .k{position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
+  .sw.on{background:var(--green)}
+  .sw.on .k{transform:translateX(17px)}
+  .hint{font-size:11px;color:var(--txt3);line-height:1.5;margin-top:14px}
+</style>
+</head>
+<body>
+  <div class="title"><span class="dot"></span>Tab Tamer</div>
+  <div class="stat"><b id="loaded">–</b> of <b id="total">–</b> tabs loaded in memory</div>
+  <button class="primary" id="snooze">Snooze background tabs</button>
+  <div class="row">
+    <label>Auto-snooze inactive tabs</label>
+    <div class="sw" id="autoSw"><input type="checkbox" id="autoOn"><span class="k"></span></div>
+  </div>
+  <div class="row">
+    <label>Snooze after</label>
+    <span class="num"><input type="number" id="minutes" min="1" max="120" value="10"> min</span>
+  </div>
+  <div class="hint">Snoozed tabs stay in your tab bar and reload instantly when clicked. Pinned tabs, the active tab, and tabs playing audio are never snoozed. Install Tab Tamer in each Chrome profile you use.</div>
+  <script src="popup.js"></script>
+</body>
+</html>
